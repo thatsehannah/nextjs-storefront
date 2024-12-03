@@ -8,6 +8,7 @@ const HomePage = () => {
       <Button
         variant='outline'
         size='lg'
+        className='m-8'
       >
         Click Me
       </Button>
