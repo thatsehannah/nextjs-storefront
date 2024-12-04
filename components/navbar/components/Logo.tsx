@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { VscCode } from 'react-icons/vsc';
+import { Sofa } from 'lucide-react';
 
 const Logo = () => {
   return (
@@ -10,7 +10,7 @@ const Logo = () => {
       asChild
     >
       <Link href='/'>
-        <VscCode className='w-6 h-6' />
+        <Sofa size={64} />
       </Link>
     </Button>
   );
