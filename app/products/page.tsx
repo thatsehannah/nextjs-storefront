@@ -3,7 +3,7 @@ import React from 'react';
 
 type SearchParams = {
   searchParams: {
-    layout?: string;
+    layout?: 'grid' | 'list';
     search?: string;
   };
 };
