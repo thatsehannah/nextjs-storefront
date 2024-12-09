@@ -6,7 +6,9 @@ type FavoriteToggleButtonProps = {
   productId: string;
 };
 
-const FavoriteToggleButton = ({ productId }: FavoriteToggleButtonProps) => {
+const FavoriteToggleButton = async ({
+  productId,
+}: FavoriteToggleButtonProps) => {
   return (
     <Button
       size='icon'
@@ -14,7 +16,7 @@ const FavoriteToggleButton = ({ productId }: FavoriteToggleButtonProps) => {
       className='p-2 cursor-pointer'
       asChild
     >
-      <Heart />
+      <Heart fill='#111' />
     </Button>
   );
 };

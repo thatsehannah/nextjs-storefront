@@ -19,3 +19,13 @@ export const fetchAllProducts = async () => {
 
   return allProducts;
 };
+
+export const fetchProductById = async (productId: string) => {
+  const product = db.product.findFirst({
+    where: {
+      id: productId,
+    },
+  });
+
+  return product;
+};

@@ -4,6 +4,7 @@ import { formatCurrency } from '@/utils/format';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
+import FavoriteToggleButton from './FavoriteToggleButton';
 
 type ProductsGridProp = {
   products: Product[];
@@ -40,6 +41,9 @@ const ProductsGrid = ({ products }: ProductsGridProp) => {
                 </CardContent>
               </Card>
             </Link>
+            <div className='absolute top-7 right-7 z-6'>
+              <FavoriteToggleButton productId={id} />
+            </div>
           </article>
         );
       })}
