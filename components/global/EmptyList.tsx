@@ -3,7 +3,7 @@ import React from 'react';
 
 type EmptyListProps = {
   heading?: string;
-  className: string;
+  className?: string;
 };
 
 const EmptyList = ({
