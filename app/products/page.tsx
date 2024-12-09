@@ -9,8 +9,9 @@ type SearchParams = {
 };
 
 const ProductsPage = async ({ searchParams }: SearchParams) => {
-  const layout = searchParams.layout || 'grid';
-  const search = searchParams.search || '';
+  //https://nextjs.org/docs/messages/sync-dynamic-apis#possible-ways-to-fix-it
+  const layout = (await searchParams).layout || 'grid';
+  const search = (await searchParams).search || '';
 
   return (
     <ProductsContainer
