@@ -14,7 +14,7 @@ const FeaturedProducts = async () => {
   return (
     <section className='pt-24'>
       <SectionTitle text='featured products' />
-      <ProductsGrid />
+      <ProductsGrid products={featuredProducts} />
     </section>
   );
 };
