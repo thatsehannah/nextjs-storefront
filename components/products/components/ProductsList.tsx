@@ -37,12 +37,12 @@ const ProductsList = ({ products }: ProductsListProps) => {
                   </div>
                   <div className='flex w-3/4 justify-between'>
                     <div>
-                      <p className='font-bold capitalize text-2xl'>{name}</p>
-                      <p className='text-muted-foreground text-1xl'>
+                      <p className='font-bold capitalize text-lg'>{name}</p>
+                      <p className='text-muted-foreground text-sm capitalize'>
                         {company}
                       </p>
                     </div>
-                    <p className='text-muted-foreground capitalize'>
+                    <p className='text-muted-foreground text-base'>
                       {dollarAmount}
                     </p>
                   </div>
