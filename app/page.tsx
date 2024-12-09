@@ -1,10 +1,13 @@
+import FeaturedProducts from '@/components/home/components/FeaturedProducts';
+import Hero from '@/components/home/components/Hero';
 import React from 'react';
 
 const HomePage = () => {
   return (
-    <div>
-      <h1 className='text-3xl text-muted-foreground'>Home Page</h1>
-    </div>
+    <>
+      <Hero />
+      <FeaturedProducts />
+    </>
   );
 };
 export default HomePage;
