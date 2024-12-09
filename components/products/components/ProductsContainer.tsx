@@ -1,6 +1,11 @@
 import React from 'react';
 
-const ProductsContainer = () => {
+type ProductsContainerProps = {
+  layout: string;
+  search: string;
+};
+
+const ProductsContainer = ({ layout, search }: ProductsContainerProps) => {
   return <div>ProductsContainer</div>;
 };
 
