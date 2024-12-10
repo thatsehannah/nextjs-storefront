@@ -1,5 +1,5 @@
-import ProductsContainer from '@/components/products/components/ProductsContainer';
 import React from 'react';
+import ProductsContainer from '@/components/products/ProductsContainer';
 
 type SearchParams = {
   searchParams: {

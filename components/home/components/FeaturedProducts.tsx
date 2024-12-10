@@ -1,6 +1,6 @@
 import EmptyList from '@/components/global/EmptyList';
 import SectionTitle from '@/components/global/SectionTitle';
-import ProductsGrid from '@/components/products/components/ProductsGrid';
+import ProductsGrid from '@/components/products/ProductsGrid';
 import { fetchFeaturedProducts } from '@/utils/actions';
 import React from 'react';
 
