@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import db from './db';
 
 //fetches products in the db that have the featured property set to true
@@ -34,6 +35,10 @@ export const fetchProductById = async (productId: string) => {
       id: productId,
     },
   });
+
+  if (!product) {
+    redirect('/products');
+  }
 
   return product;
 };
