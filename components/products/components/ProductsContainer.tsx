@@ -23,13 +23,15 @@ const LayoutButton = ({
   layoutIcon,
   variant,
 }: LayoutButtonProps) => {
+  const searchTerm = search ? `&search=${search}` : '';
+
   return (
     <Button
       size='icon'
       variant={variant}
       asChild
     >
-      <Link href={`/products?layout=${layout}${search}`}>{layoutIcon}</Link>
+      <Link href={`/products?layout=${layout}${searchTerm}`}>{layoutIcon}</Link>
     </Button>
   );
 };
@@ -38,9 +40,8 @@ const ProductsContainer = async ({
   layout,
   search,
 }: ProductsContainerProps) => {
-  const products = await fetchAllProducts();
+  const products = await fetchAllProducts({ search });
   const totalNumOfProducts = products.length;
-  const searchTerm = search ? `&search=${search}` : '';
 
   return (
     <>
