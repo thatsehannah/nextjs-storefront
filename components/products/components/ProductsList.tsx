@@ -12,7 +12,7 @@ type ProductsListProps = {
 
 const ProductsList = ({ products }: ProductsListProps) => {
   return (
-    <div className='pt-12 grid gap-4 grid-rows-1'>
+    <div className='mt-12 grid gap-y-8'>
       {products.map((product) => {
         const { name, company, image, price, id } = product;
         const dollarAmount = formatCurrency(price);
@@ -22,34 +22,31 @@ const ProductsList = ({ products }: ProductsListProps) => {
             className='group relative'
           >
             <Link href={`/products/${id}`}>
-              <Card>
-                <CardContent className='flex w-full gap-12 p-8'>
-                  <div className='w-1/4 h-64 m:h-48 rounded overflow-hidden'>
+              <Card className='transform group-hover:shadow-xl transition-shadow duration-500'>
+                <CardContent className='p-8 gap-y-4 grid md:grid-cols-3'>
+                  <div className='relative h-64 md:h-48 md:w-48'>
                     <Image
                       priority
-                      className='rounded w-full object-cover transform group-hover:scale-110 transition-transform duration-500'
-                      width={20}
-                      height={20}
+                      className='rounded-md w-full object-cover transform group-hover:scale-110 transition-transform duration-500'
                       src={image}
                       alt={name}
+                      fill
                       sizes='(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw'
                     />
                   </div>
-                  <div className='flex w-3/4 justify-between'>
-                    <div>
-                      <p className='font-bold capitalize text-lg'>{name}</p>
-                      <p className='text-muted-foreground text-sm capitalize'>
-                        {company}
-                      </p>
-                    </div>
-                    <p className='text-muted-foreground text-base'>
-                      {dollarAmount}
-                    </p>
+                  <div>
+                    <h2 className='font-semibold capitalize text-xl'>{name}</h2>
+                    <h4 className='text-muted-foreground capitalize'>
+                      {company}
+                    </h4>
                   </div>
+                  <p className='text-muted-foreground text-lg md:ml-auto'>
+                    {dollarAmount}
+                  </p>
                 </CardContent>
               </Card>
             </Link>
-            <div className='absolute bottom-7 right-7 z-6'>
+            <div className='absolute bottom-8 right-8 z-6'>
               <FavoriteToggleButton productId={id} />
             </div>
           </article>
