@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { links } from '@/utils/links';
 import { Button } from '@/components/ui/button';
 import { AlignLeft } from 'lucide-react';
+import SignOutLink from './SignOutLink';
 
 function LinksDropdown() {
   return (
@@ -41,7 +42,9 @@ function LinksDropdown() {
         })}
         <DropdownMenuSeparator />
         {/* Temporary placeholder for logout button 👇🏾 will implement logout functionality later */}
-        <DropdownMenuItem>Logout</DropdownMenuItem>
+        <DropdownMenuItem>
+          <SignOutLink />
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
