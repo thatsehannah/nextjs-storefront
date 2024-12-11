@@ -2,10 +2,10 @@ import React from 'react';
 import ProductsContainer from '@/components/products/ProductsContainer';
 
 type SearchParams = {
-  searchParams: {
+  searchParams: Promise<{
     layout?: 'grid' | 'list';
     search?: string;
-  };
+  }>;
 };
 
 const ProductsPage = async ({ searchParams }: SearchParams) => {

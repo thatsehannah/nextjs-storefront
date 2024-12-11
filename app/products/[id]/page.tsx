@@ -8,9 +8,7 @@ import ProductRating from '@/components/product/ProductRating';
 import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 
 type SearchParams = {
-  searchParams: {
-    id: string;
-  };
+  searchParams: Promise<{ id: string }>;
 };
 
 const ProductDetailsPage = async ({ searchParams }: SearchParams) => {
