@@ -1,6 +1,7 @@
 'use client';
 
 import React, { ReactNode } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
 
 type ProviderProps = {
@@ -10,6 +11,7 @@ type ProviderProps = {
 const Providers = ({ children }: ProviderProps) => {
   return (
     <>
+      <Toaster />
       <ThemeProvider
         attribute='class'
         defaultTheme='system'
