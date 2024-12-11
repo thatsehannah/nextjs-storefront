@@ -49,7 +49,7 @@ const ProductsContainer = async ({
       <section>
         <div className='flex justify-between items-center'>
           <h4 className='font-medium text-lg'>
-            <span className='text-white rounded-full px-3 py-1 mr-2 bg-foreground'>
+            <span className='text-white rounded-full px-3 py-1 mr-2 bg-primary'>
               {totalNumOfProducts}
             </span>
             product{totalNumOfProducts > 1 && 's'}

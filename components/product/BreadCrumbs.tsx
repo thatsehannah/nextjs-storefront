@@ -35,7 +35,7 @@ const BreadCrumbs = ({ name }: BreadCrumbsProps) => {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className='text-lg'>{name}</BreadcrumbPage>
+          <BreadcrumbPage className='text-lg capitalize'>{name}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
