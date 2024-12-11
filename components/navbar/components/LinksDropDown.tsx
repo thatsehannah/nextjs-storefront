@@ -11,6 +11,8 @@ import { links } from '@/utils/links';
 import { Button } from '@/components/ui/button';
 import { AlignLeft } from 'lucide-react';
 import SignOutLink from './SignOutLink';
+import UserIcon from './UserIcon';
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs';
 
 function LinksDropdown() {
   return (
@@ -21,6 +23,7 @@ function LinksDropdown() {
           className='flex gap-4 max-w-[100px]'
         >
           <AlignLeft />
+          <UserIcon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -28,23 +31,38 @@ function LinksDropdown() {
         align='start'
         sideOffset={10}
       >
-        {links.map((link) => {
-          return (
-            <DropdownMenuItem key={link.href}>
-              <Link
-                href={link.href}
-                className='capitalize w-full'
-              >
-                {link.label}
-              </Link>
-            </DropdownMenuItem>
-          );
-        })}
-        <DropdownMenuSeparator />
-        {/* Temporary placeholder for logout button 👇🏾 will implement logout functionality later */}
-        <DropdownMenuItem>
-          <SignOutLink />
-        </DropdownMenuItem>
+        <SignedOut>
+          <DropdownMenuItem>
+            <SignInButton mode='modal'>
+              <button className='w-full text-left'>Log In</button>
+            </SignInButton>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <SignUpButton mode='modal'>
+              <button className='w-full text-left'>Register</button>
+            </SignUpButton>
+          </DropdownMenuItem>
+        </SignedOut>
+        <SignedIn>
+          {links.map((link) => {
+            return (
+              <DropdownMenuItem key={link.href}>
+                <Link
+                  href={link.href}
+                  className='capitalize w-full'
+                >
+                  {link.label}
+                </Link>
+              </DropdownMenuItem>
+            );
+          })}
+          <DropdownMenuSeparator />
+          {/* Temporary placeholder for logout button 👇🏾 will implement logout functionality later */}
+          <DropdownMenuItem>
+            <SignOutLink />
+          </DropdownMenuItem>
+        </SignedIn>
       </DropdownMenuContent>
     </DropdownMenu>
   );
