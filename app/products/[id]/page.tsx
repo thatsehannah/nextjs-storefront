@@ -7,14 +7,14 @@ import AddToCartButton from '@/components/product/AddToCartButton';
 import ProductRating from '@/components/product/ProductRating';
 import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 
-type ProductDetailsPageProps = {
-  params: {
+type SearchParams = {
+  searchParams: {
     id: string;
   };
 };
 
-const ProductDetailsPage = async ({ params }: ProductDetailsPageProps) => {
-  const productId = (await params).id;
+const ProductDetailsPage = async ({ searchParams }: SearchParams) => {
+  const productId = (await searchParams).id;
   const product = await fetchProductById(productId);
   const { name, company, description, price, image } = product;
   const dollarAmount = formatCurrency(price);
