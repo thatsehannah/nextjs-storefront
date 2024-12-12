@@ -13,8 +13,12 @@ import { AlignLeft } from 'lucide-react';
 import SignOutLink from './SignOutLink';
 import UserIcon from './UserIcon';
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 
-function LinksDropdown() {
+const LinksDropdown = async () => {
+  const userId = (await auth()).userId;
+  const isAdmin = userId === process.env.ADMIN_USER_ID;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -46,6 +50,9 @@ function LinksDropdown() {
         </SignedOut>
         <SignedIn>
           {links.map((link) => {
+            if (link.label === 'dashboard' && !isAdmin) {
+              return null;
+            }
             return (
               <DropdownMenuItem key={link.href}>
                 <Link
@@ -66,5 +73,5 @@ function LinksDropdown() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
 export default LinksDropdown;
