@@ -16,6 +16,7 @@ const ProductsGrid = ({ products }: ProductsGridProp) => {
       {products.map((product) => {
         const { name, price, image, id } = product;
         const dollarAmount = formatCurrency(price);
+
         return (
           <article
             key={id}

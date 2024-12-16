@@ -29,6 +29,7 @@ export const fetchAllProducts = async ({ search = '' }: { search: string }) => {
   return allProducts;
 };
 
+//fetches a product by its id
 export const fetchProductById = async (productId: string) => {
   const product = await db.product.findFirst({
     where: {

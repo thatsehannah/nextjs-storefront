@@ -16,6 +16,7 @@ const ProductsList = ({ products }: ProductsListProps) => {
       {products.map((product) => {
         const { name, company, image, price, id } = product;
         const dollarAmount = formatCurrency(price);
+
         return (
           <article
             key={id}

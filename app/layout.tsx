@@ -16,12 +16,14 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
+    // Wrapping the layout in Clerk Provder so the entire app can have access user data
     <ClerkProvider>
       <html
         lang='en'
         suppressHydrationWarning
       >
         <body className={inter.className}>
+          {/* Contains multiple providers */}
           <Providers>
             <Navbar />
             <Container className='py-20'>{children}</Container>

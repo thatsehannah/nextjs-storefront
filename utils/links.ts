@@ -3,6 +3,7 @@ type NavLink = {
   label: string;
 };
 
+//links logged in users will see
 export const links: NavLink[] = [
   { href: '/', label: 'home' },
   { href: '/about', label: 'about' },
@@ -13,6 +14,7 @@ export const links: NavLink[] = [
   { href: '/admin/sales', label: 'dashboard' },
 ];
 
+//links only admins will see
 export const adminLinks: NavLink[] = [
   { href: '/admin/sales', label: 'sales' },
   { href: '/admin/products', label: 'my products' },

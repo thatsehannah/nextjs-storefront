@@ -16,7 +16,11 @@ import { SignedIn, SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 
 const LinksDropdown = async () => {
+  //Getting the current user's id if they're logged in
   const userId = (await auth()).userId;
+
+  //Checking if the current logged in user's ID matches the admin's user ID.
+  //User ID is grabbed from Clerk's dashboard
   const isAdmin = userId === process.env.ADMIN_USER_ID;
 
   return (
@@ -35,6 +39,8 @@ const LinksDropdown = async () => {
         align='start'
         sideOffset={10}
       >
+        {/* START Signed out links */}
+        {/* Links that will be shown if no user is signed out */}
         <SignedOut>
           <DropdownMenuItem>
             <SignInButton mode='modal'>
@@ -48,6 +54,10 @@ const LinksDropdown = async () => {
             </SignUpButton>
           </DropdownMenuItem>
         </SignedOut>
+        {/* END Signed out links */}
+
+        {/* START Signed in links */}
+        {/* Links that will be shown if a user is signed in */}
         <SignedIn>
           {links.map((link) => {
             if (link.label === 'dashboard' && !isAdmin) {
@@ -65,11 +75,11 @@ const LinksDropdown = async () => {
             );
           })}
           <DropdownMenuSeparator />
-          {/* Temporary placeholder for logout button 👇🏾 will implement logout functionality later */}
           <DropdownMenuItem>
             <SignOutLink />
           </DropdownMenuItem>
         </SignedIn>
+        {/* END Signed in links */}
       </DropdownMenuContent>
     </DropdownMenu>
   );

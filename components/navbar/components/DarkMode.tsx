@@ -17,6 +17,7 @@ const DarkMode = () => {
 
   return (
     <DropdownMenu>
+      {/* The DropdownMenuTrigger is the button or link that will trigger the dropdown action */}
       <DropdownMenuTrigger asChild>
         <Button
           variant='outline'
