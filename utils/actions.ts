@@ -81,7 +81,15 @@ export const createProductAction = async (
     const rawData = Object.fromEntries(formData);
 
     //validating the key-value pairs against the custom schema using zod
-    const validatedFields = productSchema.parse(rawData);
+    //safe parse returns an object that'll contain a success property or a data property (or error if falsy)
+    //https://zod.dev/?id=basic-usage
+    const validatedFields = productSchema.safeParse(rawData);
+
+    if (!validatedFields.success) {
+      //using safeParse for validatedFields allows you to iterate over the errors like so
+      const errors = validatedFields.error.errors.map((error) => error.message);
+      throw new Error(errors.join(','));
+    }
 
     return { message: 'product created' };
   } catch (error) {
