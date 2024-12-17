@@ -2,16 +2,16 @@ import React from 'react';
 import ProductsContainer from '@/components/products/ProductsContainer';
 
 type SearchParams = {
-  searchParams: Promise<{
+  params: Promise<{
     layout?: 'grid' | 'list';
     search?: string;
   }>;
 };
 
-const ProductsPage = async ({ searchParams }: SearchParams) => {
+const ProductsPage = async ({ params }: SearchParams) => {
   //https://nextjs.org/docs/messages/sync-dynamic-apis#possible-ways-to-fix-it
-  const layout = (await searchParams).layout || 'grid';
-  const search = (await searchParams).search || '';
+  const layout = (await params).layout || 'grid';
+  const search = (await params).search || '';
 
   return (
     <ProductsContainer

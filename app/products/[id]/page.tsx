@@ -8,11 +8,11 @@ import ProductRating from '@/components/product/ProductRating';
 import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 
 type SearchParams = {
-  searchParams: Promise<{ id: string }>;
+  params: Promise<{ id: string }>;
 };
 
-const ProductDetailsPage = async ({ searchParams }: SearchParams) => {
-  const productId = (await searchParams).id;
+const ProductDetailsPage = async ({ params }: SearchParams) => {
+  const productId = (await params).id;
   const product = await fetchProductById(productId);
   const { name, company, description, price, image } = product;
   const dollarAmount = formatCurrency(price);

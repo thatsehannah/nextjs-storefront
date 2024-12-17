@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import db from './db';
 import { auth, currentUser } from '@clerk/nextjs/server';
-import { productSchema } from './validationSchema';
+import { productSchema, validateWithZodSchema } from './validationSchemas';
 
 //START - HELPER FUNCTIONS
 const getAuthUser = async () => {
@@ -79,17 +79,15 @@ export const createProductAction = async (
   try {
     //grabbing the key-value pairs from the form inputs
     const rawData = Object.fromEntries(formData);
+    const validatedFields = validateWithZodSchema(productSchema, rawData);
 
-    //validating the key-value pairs against the custom schema using zod
-    //safe parse returns an object that'll contain a success property or a data property (or error if falsy)
-    //https://zod.dev/?id=basic-usage
-    const validatedFields = productSchema.safeParse(rawData);
-
-    if (!validatedFields.success) {
-      //using safeParse for validatedFields allows you to iterate over the errors like so
-      const errors = validatedFields.error.errors.map((error) => error.message);
-      throw new Error(errors.join(','));
-    }
+    await db.product.create({
+      data: {
+        ...validatedFields,
+        image: '/images/product3.jpg',
+        clerkId: user.id,
+      },
+    });
 
     return { message: 'product created' };
   } catch (error) {
