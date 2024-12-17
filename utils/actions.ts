@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation';
 import db from './db';
 import { auth, currentUser } from '@clerk/nextjs/server';
+import { productSchema } from './validationSchema';
 
 //START - HELPER FUNCTIONS
 const getAuthUser = async () => {
@@ -76,24 +77,8 @@ export const createProductAction = async (
   const user = await getAuthUser();
 
   try {
-    const name = formData.get('name') as string;
-    const company = formData.get('company') as string;
-    const price = Number(formData.get('price') as string);
-    const image = formData.get('image') as File; //temp
-    const description = formData.get('description') as string;
-    const featured = Boolean(formData.get('featured') as string);
-
-    await db.product.create({
-      data: {
-        name,
-        company,
-        price,
-        image: '/images/product1.jpg',
-        description,
-        featured,
-        clerkId: user.id,
-      },
-    });
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = productSchema.parse(rawData);
 
     return { message: 'product created' };
   } catch (error) {
