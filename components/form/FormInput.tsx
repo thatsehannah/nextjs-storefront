@@ -5,7 +5,7 @@ import { Input } from '../ui/input';
 type FormInputProps = {
   nameAttr: string;
   type: string;
-  label?: string;
+  label: string;
   defaultValue?: string;
   placeholder?: string;
 };
@@ -23,7 +23,7 @@ const FormInput = ({
         className='capitalize'
         htmlFor={nameAttr}
       >
-        {label || nameAttr}
+        {label}
       </Label>
       <Input
         id={nameAttr}
