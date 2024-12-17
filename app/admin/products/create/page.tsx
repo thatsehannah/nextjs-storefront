@@ -4,6 +4,7 @@ import { createProductAction } from '@/utils/actions';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import FormInput from '@/components/form/FormInput';
 
 const AdminCreateProductPage = () => {
   const name = faker.commerce.productName();
@@ -15,15 +16,12 @@ const AdminCreateProductPage = () => {
       <h1 className='text-2xl font-semibold mb-8 capitalize'>create product</h1>
       <div className='border p-8 rounded-md'>
         <form action={createProductAction}>
-          <div className='mb-2'>
-            <Label htmlFor='name'>Product name</Label>
-            <Input
-              id='name'
-              name='name'
-              type='text'
-              defaultValue={name}
-            />
-          </div>
+          <FormInput
+            nameAttr='name'
+            type='text'
+            defaultValue={name}
+            label='product name'
+          />
           <Button
             type='submit'
             size='lg'
