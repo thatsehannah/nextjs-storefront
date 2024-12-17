@@ -77,7 +77,10 @@ export const createProductAction = async (
   const user = await getAuthUser();
 
   try {
+    //grabbing the key-value pairs from the form inputs
     const rawData = Object.fromEntries(formData);
+
+    //validating the key-value pairs against the custom schema using zod
     const validatedFields = productSchema.parse(rawData);
 
     return { message: 'product created' };
