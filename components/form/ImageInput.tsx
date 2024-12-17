@@ -1,8 +1,11 @@
 import React from 'react';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
+import { Prisma } from '@prisma/client';
 
-const name = 'image';
+//this is done so we don't have to hard code 'image' every where in our code.
+//access the prisma client -> locate the model -> find the property that you would want to use
+const name = Prisma.ProductScalarFieldEnum.image;
 
 const ImageInput = () => {
   return (
