@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import EmptyList from '@/components/global/EmptyList';
-import { fetchAdminProducts } from '@/utils/actions';
+import { fetchAdminProducts, deleteProductAction } from '@/utils/actions';
 import { formatCurrency } from '@/utils/format';
 import {
   Table,
@@ -13,6 +13,19 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { IconButton } from '@/components/form/FormButtons';
+import FormContainer from '@/components/form/FormContainer';
+
+const DeleteProduct = (productId: { productId: string }) => {
+  //deleteProduct becomes a new function that, when called, automatically includes the productId argument
+  //Binding ensures that deleteProductAction always receives the required productId
+  const deleteProduct = deleteProductAction.bind(null, productId);
+
+  return (
+    <FormContainer action={deleteProduct}>
+      <IconButton actionType='delete' />
+    </FormContainer>
+  );
+};
 
 const AdminProductsPage = async () => {
   const products = await fetchAdminProducts();
@@ -50,8 +63,10 @@ const AdminProductsPage = async () => {
                 <TableCell>{formattedPrice}</TableCell>
                 <TableCell>
                   <div className='flex gap-x-2 items-center'>
-                    <IconButton actionType='edit' />
-                    <IconButton actionType='delete' />
+                    <Link href={`/admin/products/${id}/edit`}>
+                      <IconButton actionType='edit' />
+                    </Link>
+                    <DeleteProduct productId={id} />
                   </div>
                 </TableCell>
               </TableRow>
