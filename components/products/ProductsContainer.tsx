@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { fetchAllProducts } from '@/utils/actions';
+import { fetchProductBySearchTerm } from '@/utils/actions';
 import { LayoutGrid, LayoutList } from 'lucide-react';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
@@ -40,7 +40,7 @@ const ProductsContainer = async ({
   layout,
   search,
 }: ProductsContainerProps) => {
-  const products = await fetchAllProducts({ search });
+  const products = await fetchProductBySearchTerm({ search });
   const totalNumOfProducts = products.length;
 
   return (
