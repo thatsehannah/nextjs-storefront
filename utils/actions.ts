@@ -9,6 +9,7 @@ import {
   validateWithZodSchema,
 } from './validationSchemas';
 import { uploadImage } from './supabase';
+import { revalidatePath } from 'next/cache';
 
 //START - HELPER FUNCTIONS
 const getAuthUser = async () => {
@@ -122,6 +123,24 @@ export const createProductAction = async (
 
   //redirecting to admin products page after a successful product creation
   redirect('/admin/products');
+};
+
+//deleting the product from the db
+export const deleteProductAction = async (prevState: { productId: string }) => {
+  const { productId } = prevState;
+  await getAdminUser();
+
+  try {
+    await db.product.delete({
+      where: {
+        id: productId,
+      },
+    });
+    revalidatePath('/admin/products');
+    return { message: 'product removed' };
+  } catch (error) {
+    return renderError(error);
+  }
 };
 
 //fetching all of the products for the admin products page to list
