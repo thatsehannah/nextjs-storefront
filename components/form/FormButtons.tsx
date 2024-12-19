@@ -4,7 +4,7 @@ import React from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
-import { RotateCw } from 'lucide-react';
+import { FilePen, RotateCw, Trash2 } from 'lucide-react';
 
 type SubmitFormButtonProps = {
   className?: string;
@@ -34,6 +34,37 @@ export const SubmitButton = ({
       ) : (
         text
       )}
+    </Button>
+  );
+};
+
+type IconButtonProps = {
+  actionType: 'edit' | 'delete';
+};
+
+export const IconButton = ({ actionType }: IconButtonProps) => {
+  const { pending } = useFormStatus();
+
+  const renderIcon = () => {
+    switch (actionType) {
+      case 'edit':
+        return <FilePen />;
+      case 'delete':
+        return <Trash2 />;
+      default:
+        const never: never = actionType;
+        throw new Error(`Invalid action type: ${never}`);
+    }
+  };
+
+  return (
+    <Button
+      type='submit'
+      size='icon'
+      variant='link'
+      className='p-2 cursor-pointer'
+    >
+      {pending ? <RotateCw className='animate-spin' /> : renderIcon()}
     </Button>
   );
 };
