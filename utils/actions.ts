@@ -8,6 +8,7 @@ import {
   productSchema,
   validateWithZodSchema,
 } from './validationSchemas';
+import { uploadImage } from './supabase';
 
 //START - HELPER FUNCTIONS
 const getAuthUser = async () => {
@@ -85,20 +86,21 @@ export const createProductAction = async (
     const rawData = Object.fromEntries(formData);
     const imageFile = formData.get('image') as File;
     const validatedFields = validateWithZodSchema(productSchema, rawData);
-    const validateImageFile = validateWithZodSchema(productImageSchema, {
+    const validatedImageFile = validateWithZodSchema(productImageSchema, {
       image: imageFile,
     });
+    const fullPath = await uploadImage(validatedImageFile.image);
 
     await db.product.create({
       data: {
         ...validatedFields,
-        image: '/images/product3.jpg',
+        image: fullPath,
         clerkId: user.id,
       },
     });
-
-    return { message: 'product created' };
   } catch (error) {
     return renderError(error);
   }
+
+  redirect('/admin/products');
 };
