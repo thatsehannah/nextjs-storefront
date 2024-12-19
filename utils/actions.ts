@@ -89,6 +89,9 @@ export const createProductAction = async (
     const validatedImageFile = validateWithZodSchema(productImageSchema, {
       image: imageFile,
     });
+
+    //uploading the image to supabase bucket first so we can get the public url to save
+    //to the database
     const fullPath = await uploadImage(validatedImageFile.image);
 
     await db.product.create({
@@ -102,5 +105,6 @@ export const createProductAction = async (
     return renderError(error);
   }
 
+  //redirecting to admin products page after a successful product creation
   redirect('/admin/products');
 };

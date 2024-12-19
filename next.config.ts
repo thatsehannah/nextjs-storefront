@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.pexels.com',
       },
+      // adding the protocol below to show images that were uploaded to supabase
       {
         protocol: 'https',
         hostname: 'jjphtchazclzvxkexkrt.supabase.co',

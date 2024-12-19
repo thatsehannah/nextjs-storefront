@@ -1,5 +1,28 @@
 import { z, ZodSchema } from 'zod';
 
+//helper function takes in the raw data and the schema that is going to be used to validate the raw data
+//will be generic since we will use this function against multiple schemas
+export const validateWithZodSchema = <T>(
+  schema: ZodSchema<T>,
+  data: unknown
+): T => {
+  //validating the key-value pairs against the custom schema using zod
+  //safe parse returns an object that'll contain a success property or a data property (or error if falsy)
+  //https://zod.dev/?id=basic-usage
+  const result = schema.safeParse(data);
+
+  if (!result.success) {
+    //using safeParse on data allows you to iterate over the errors like so
+    const errors = result.error.errors.map((err) => {
+      return err.message;
+    });
+    throw new Error(errors.join(', '));
+  }
+
+  //returns the successfully validated data of type T
+  return result.data;
+};
+
 //helper function for validating image files
 const validateImageFile = () => {
   //specifies the maximum allowed file size as 1MB
@@ -30,29 +53,6 @@ const validateImageFile = () => {
       },
       { message: 'File must be an image' }
     );
-};
-
-//helper function takes in the raw data and the schema that is going to be used to validate the raw data
-//will be generic since we will use this function against multiple schemas
-export const validateWithZodSchema = <T>(
-  schema: ZodSchema<T>,
-  data: unknown
-): T => {
-  //validating the key-value pairs against the custom schema using zod
-  //safe parse returns an object that'll contain a success property or a data property (or error if falsy)
-  //https://zod.dev/?id=basic-usage
-  const result = schema.safeParse(data);
-
-  if (!result.success) {
-    //using safeParse on data allows you to iterate over the errors like so
-    const errors = result.error.errors.map((err) => {
-      return err.message;
-    });
-    throw new Error(errors.join(', '));
-  }
-
-  //returns the successfully validated data of type T
-  return result.data;
 };
 
 //this will be used to validate against input data that will be used to create or update products
