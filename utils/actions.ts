@@ -8,7 +8,7 @@ import {
   productSchema,
   validateWithZodSchema,
 } from './validationSchemas';
-import { uploadImage } from './supabase';
+import { deleteImage, uploadImage } from './supabase';
 import { revalidatePath } from 'next/cache';
 
 //START - HELPER FUNCTIONS
@@ -125,17 +125,21 @@ export const createProductAction = async (
   redirect('/admin/products');
 };
 
-//deleting the product from the db
+//deleting the product from the db & supabase bucket
 export const deleteProductAction = async (prevState: { productId: string }) => {
   const { productId } = prevState;
   await getAdminUser();
 
   try {
-    await db.product.delete({
+    const product = await db.product.delete({
       where: {
         id: productId,
       },
     });
+
+    //also deleting image from supabase
+    deleteImage(product.image);
+
     revalidatePath('/admin/products');
     return { message: 'product removed' };
   } catch (error) {
