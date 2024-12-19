@@ -3,7 +3,11 @@
 import { redirect } from 'next/navigation';
 import db from './db';
 import { auth, currentUser } from '@clerk/nextjs/server';
-import { productSchema, validateWithZodSchema } from './validationSchemas';
+import {
+  productImageSchema,
+  productSchema,
+  validateWithZodSchema,
+} from './validationSchemas';
 
 //START - HELPER FUNCTIONS
 const getAuthUser = async () => {
@@ -79,7 +83,11 @@ export const createProductAction = async (
   try {
     //grabbing the key-value pairs from the form inputs
     const rawData = Object.fromEntries(formData);
+    const imageFile = formData.get('image') as File;
     const validatedFields = validateWithZodSchema(productSchema, rawData);
+    const validateImageFile = validateWithZodSchema(productImageSchema, {
+      image: imageFile,
+    });
 
     await db.product.create({
       data: {
