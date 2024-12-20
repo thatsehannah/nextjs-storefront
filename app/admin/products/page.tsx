@@ -29,8 +29,9 @@ const DeleteProduct = (productId: { productId: string }) => {
 
 const AdminProductsPage = async () => {
   const products = await fetchAdminProducts();
+
   if (products.length === 0) {
-    return <EmptyList />;
+    return <EmptyList heading='No products at this time' />;
   }
 
   return (

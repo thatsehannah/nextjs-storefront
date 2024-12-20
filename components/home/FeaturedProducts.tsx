@@ -8,7 +8,12 @@ const FeaturedProducts = async () => {
   const featuredProducts = await fetchFeaturedProducts();
 
   if (featuredProducts.length === 0) {
-    return <EmptyList />;
+    return (
+      <EmptyList
+        className='mt-8'
+        heading='No products at this time'
+      />
+    );
   }
 
   return (
