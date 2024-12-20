@@ -7,6 +7,8 @@ import AddToCartButton from '@/components/product/AddToCartButton';
 import ProductRating from '@/components/product/ProductRating';
 import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 
+//on the main products page (/products/page.tsx), I recognized the distinction between "searchParams"
+//and "params". "params" is used for dynamic route segments in the URL path and are derived from the path portion of the URL, based on dynamic segment definitions in your file or folder structure
 type SearchParams = {
   params: Promise<{ id: string }>;
 };
